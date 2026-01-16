@@ -1,42 +1,50 @@
+// components/layout/Header.tsx
 import React from "react";
+
+const categories = [
+  "Rooms",
+  "Mansion",
+  "Countryside",
+  "Beachfront",
+  "Luxury",
+  "Cabins",
+];
 
 const Header: React.FC = () => {
   return (
-    <header className="bg-white shadow-md sticky top-0 z-50">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between h-16">
+    <header className="sticky top-0 z-50 bg-white border-b">
+      {/* Top Row */}
+      <div className="flex items-center justify-between px-6 py-4 max-w-7xl mx-auto">
         {/* Logo */}
-        <div className="text-2xl font-bold text-blue-600">ALX Listings</div>
+        <div className="text-xl font-bold">alx</div>
 
-        {/* Navigation */}
-        <nav className="hidden md:flex space-x-6">
-          <a href="#" className="hover:text-blue-600">Home</a>
-          <a href="#" className="hover:text-blue-600">Listings</a>
-          <a href="#" className="hover:text-blue-600">Contact</a>
-        </nav>
-
-        {/* Search & Auth */}
-        <div className="flex items-center space-x-4">
+        {/* Search */}
+        <div className="hidden md:flex items-center border rounded-full px-4 py-2 shadow-sm">
           <input
             type="text"
-            placeholder="Search..."
-            className="border rounded px-3 py-1 focus:outline-none focus:ring-2 focus:ring-blue-600"
+            placeholder="Search destinations"
+            className="outline-none text-sm w-64"
           />
-          <button className="text-blue-600 font-medium hover:underline">Sign In</button>
-          <button className="bg-blue-600 text-white px-3 py-1 rounded hover:bg-blue-700">
-            Sign Up
+        </div>
+
+        {/* Auth */}
+        <div className="flex items-center gap-4 text-sm">
+          <button className="hover:underline">Sign in</button>
+          <button className="bg-black text-white px-4 py-2 rounded-full">
+            Sign up
           </button>
         </div>
       </div>
 
-      {/* Accommodation Types */}
-      <div className="bg-gray-50 py-2 px-4 overflow-x-auto whitespace-nowrap">
-        {["Rooms", "Mansion", "Countryside", "Villa", "Chalet", "Apartment"].map((type) => (
-          <button
-            key={type}
-            className="inline-block bg-white border rounded-full px-4 py-1 mr-2 mb-2 hover:bg-blue-100"
+      {/* Category Nav */}
+      <div className="flex gap-6 px-6 py-3 overflow-x-auto text-sm max-w-7xl mx-auto">
+        {categories.map((cat) => (
+          <span
+            key={cat}
+            className="cursor-pointer whitespace-nowrap text-gray-600 hover:text-black"
           >
-            {type}
-          </button>
+            {cat}
+          </span>
         ))}
       </div>
     </header>

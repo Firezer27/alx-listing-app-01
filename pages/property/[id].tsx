@@ -11,12 +11,8 @@ export default function PropertyPage() {
   );
 
   if (!property) {
-    return <p className="p-6">Property not found</p>;
+    return <p className="p-10">Property not found</p>;
   }
 
-  return (
-    <div>
-      <PropertyDetail property={property} />
-    </div>
-  );
+  return <PropertyDetail property={property} />;
 }

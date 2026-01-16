@@ -1,13 +1,3 @@
-export interface CardProps {
-  title: string;
-  description: string;
-  image: string;
-}
-
-export interface ButtonProps {
-  label: string;
-  onClick?: () => void;
-}
 
 export interface Address {
   state: string;
@@ -21,23 +11,21 @@ export interface Offers {
   occupants: string;
 }
 
-export interface Review {
-  name: string;
-  avatar: string;
-  rating: number;
-  comment: string;
-}
-
 export interface PropertyProps {
   name: string;
-  address: Address;
+  address: {
+    state: string;
+    city: string;
+    country: string;
+  };
   rating: number;
   category: string[];
   price: number;
-  offers: Offers;
+  offers: {
+    bed: string;
+    shower: string;
+    occupants: string;
+  };
   image: string;
-  images?: string[];
-  description?: string;
-  reviews?: Review[];
-  discount?: string;
+  discount: string;
 }

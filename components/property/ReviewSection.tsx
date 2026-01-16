@@ -1,30 +1,48 @@
-import { Review } from "@/interfaces";
+import { Star } from "lucide-react";
 
-const ReviewSection: React.FC<{ reviews: Review[] }> = ({ reviews }) => {
+const reviews = [
+  {
+    name: "John Doe",
+    rating: 5,
+    comment: "Amazing stay! Super clean and great location.",
+  },
+  {
+    name: "Sarah Smith",
+    rating: 4,
+    comment: "Very comfortable and well equipped.",
+  },
+];
+
+const ReviewSection = () => {
   return (
-    <div className="mt-8">
-      <h3 className="text-2xl font-semibold mb-4">Reviews</h3>
+    <section className="mt-10">
+      <h3 className="text-xl font-semibold mb-6">
+        {reviews.length} Reviews
+      </h3>
 
-      {reviews.map((review, index) => (
-        <div key={index} className="border-b pb-4 mb-4">
-          <div className="flex items-center gap-4">
-            <img
-              src={review.avatar}
-              alt={review.name}
-              className="w-12 h-12 rounded-full"
-            />
-            <div>
-              <p className="font-bold">{review.name}</p>
-              <p className="text-yellow-500">
-                ⭐ {review.rating}
-              </p>
+      <div className="grid gap-6">
+        {reviews.map((review, index) => (
+          <div key={index}>
+            <div className="flex items-center gap-3">
+              <div className="w-10 h-10 rounded-full bg-gray-300" />
+              <div>
+                <p className="font-medium">{review.name}</p>
+                <div className="flex">
+                  {[...Array(review.rating)].map((_, i) => (
+                    <Star
+                      key={i}
+                      size={14}
+                      className="fill-black"
+                    />
+                  ))}
+                </div>
+              </div>
             </div>
+            <p className="mt-2 text-gray-600">{review.comment}</p>
           </div>
-
-          <p className="mt-2 text-gray-700">{review.comment}</p>
-        </div>
-      ))}
-    </div>
+        ))}
+      </div>
+    </section>
   );
 };
 

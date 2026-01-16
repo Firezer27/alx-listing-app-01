@@ -1,30 +1,34 @@
-import { useState } from "react";
-
 const BookingSection: React.FC<{ price: number }> = ({ price }) => {
-  const [nights, setNights] = useState(7);
-
   return (
-    <div className="bg-white p-6 shadow-lg rounded-lg border">
-      <h3 className="text-2xl font-semibold">
-        ${price} <span className="text-sm">/ night</span>
-      </h3>
-
-      <div className="mt-4">
-        <label className="block text-sm">Check-in</label>
-        <input type="date" className="border p-2 w-full mt-1" />
+    <div className="sticky top-24 border rounded-xl p-6 shadow-lg h-fit">
+      <div className="flex justify-between items-center">
+        <p className="text-xl font-semibold">${price}</p>
+        <span className="text-sm text-gray-600">per night</span>
       </div>
 
-      <div className="mt-4">
-        <label className="block text-sm">Check-out</label>
-        <input type="date" className="border p-2 w-full mt-1" />
+      {/* Dates */}
+      <div className="border rounded-lg mt-4">
+        <div className="grid grid-cols-2">
+          <div className="p-3 border-r">
+            <label className="text-xs font-semibold">CHECK-IN</label>
+            <input type="date" className="w-full mt-1 outline-none" />
+          </div>
+          <div className="p-3">
+            <label className="text-xs font-semibold">CHECK-OUT</label>
+            <input type="date" className="w-full mt-1 outline-none" />
+          </div>
+        </div>
       </div>
 
-      <div className="mt-4 font-semibold">
-        Total payment: ${price * nights}
+      {/* Total */}
+      <div className="flex justify-between mt-4">
+        <span>Total</span>
+        <span className="font-semibold">${price * 5}</span>
       </div>
 
-      <button className="mt-4 w-full bg-green-500 hover:bg-green-600 text-white py-3 rounded-md">
-        Reserve now
+      {/* CTA */}
+      <button className="mt-6 w-full bg-black text-white py-3 rounded-lg hover:bg-gray-800 transition">
+        Reserve
       </button>
     </div>
   );

@@ -1,78 +1,80 @@
 import { PropertyProps } from "@/interfaces";
 import BookingSection from "./BookingSection";
 import ReviewSection from "./ReviewSection";
+import { Star } from "lucide-react";
 
 const PropertyDetail: React.FC<{ property: PropertyProps }> = ({ property }) => {
   return (
-    <div className="container mx-auto px-4 py-6">
+    <div className="max-w-7xl mx-auto px-6 lg:px-8 py-10">
       {/* Header */}
-      <h1 className="text-4xl font-bold">{property.name}</h1>
+      <h1 className="text-3xl font-semibold">{property.name}</h1>
 
-      <div className="flex items-center gap-3 mt-2 text-gray-600">
-        <span className="text-yellow-500 font-semibold">
-          ⭐ {property.rating}
-        </span>
+      <div className="flex items-center gap-2 mt-2 text-sm text-gray-600">
+        <Star size={16} className="fill-black" />
+        <span>{property.rating}</span>
+        <span>·</span>
         <span>
           {property.address.city}, {property.address.country}
         </span>
       </div>
 
-      {/* Main layout */}
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mt-6">
-        {/* LEFT CONTENT */}
-        <div className="lg:col-span-2">
-          {/* Image Grid */}
-          <div className="grid grid-cols-2 gap-4">
+      {/* Image Grid */}
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-6">
+        <img
+          src={property.image}
+          className="w-full h-[420px] object-cover rounded-xl"
+          alt={property.name}
+        />
+        <div className="grid grid-cols-2 gap-4">
+          {[1, 2, 3, 4].map((i) => (
             <img
+              key={i}
               src={property.image}
-              alt={property.name}
-              className="col-span-2 h-96 w-full object-cover rounded-lg"
+              className="h-[200px] w-full object-cover rounded-xl"
+              alt="property"
             />
-            {property.images?.slice(1).map((img, index) => (
-              <img
-                key={index}
-                src={img}
-                alt={`${property.name}-${index}`}
-                className="h-48 w-full object-cover rounded-lg"
-              />
-            ))}
-          </div>
+          ))}
+        </div>
+      </div>
 
-          {/* Description */}
-          <div className="mt-6">
-            <h2 className="text-2xl font-semibold">Description</h2>
-            <p className="mt-2 text-gray-700">
-              {property.description}
+      {/* Content + Booking */}
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-12 mt-10">
+        {/* LEFT */}
+        <div className="lg:col-span-2">
+          {/* About */}
+          <section className="border-b pb-6">
+            <h2 className="text-2xl font-semibold">
+              Entire place hosted by ALX
+            </h2>
+            <p className="text-gray-600 mt-2">
+              {property.offers.occupants} guests · {property.offers.bed} beds ·{" "}
+              {property.offers.shower} baths
             </p>
-          </div>
+          </section>
 
           {/* Amenities */}
-          <div className="mt-6">
-            <h2 className="text-2xl font-semibold">
+          <section className="mt-6">
+            <h3 className="text-xl font-semibold mb-4">
               What this place offers
-            </h2>
-            <ul className="flex flex-wrap gap-3 mt-3">
-              {property.category.map((amenity, index) => (
-                <li
+            </h3>
+            <div className="grid grid-cols-2 gap-4">
+              {property.category.map((item, index) => (
+                <div
                   key={index}
-                  className="bg-gray-100 px-4 py-2 rounded-md"
+                  className="flex items-center gap-2 text-gray-700"
                 >
-                  {amenity}
-                </li>
+                  ✔ {item}
+                </div>
               ))}
-            </ul>
-          </div>
+            </div>
+          </section>
 
           {/* Reviews */}
-          {property.reviews && (
-            <ReviewSection reviews={property.reviews} />
-          )}
+          <ReviewSection />
         </div>
 
-        {/* RIGHT SIDEBAR */}
-        <div className="lg:sticky lg:top-24 h-fit">
-          <BookingSection price={property.price} />
-        </div>
+        {/* RIGHT */}
+        <BookingSection price={property.price} />
       </div>
     </div>
   );
